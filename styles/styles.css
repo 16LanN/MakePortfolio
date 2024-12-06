@@ -14,13 +14,14 @@ body{
     justify-content: center;
     flex-direction: column;
 }
-.sign-in-container{
-    z-index: 0;
+.sign-in-container {
+    z-index: 10; /* Keep this below the navbar */
     margin-top: 100px;
     width: 100%;
     display: flex;
     justify-content: center;
-}
+    position: relative; /* Ensure proper stacking context */
+  }
 .container{
     background-color: #fff;
     border-radius: 30px;
