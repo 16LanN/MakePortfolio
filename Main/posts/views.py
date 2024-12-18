@@ -10,7 +10,7 @@ from drf_spectacular.types import OpenApiTypes
 @extend_schema(
         request={},
         responses={201: PostSerializer},
-        tags=['Posts']
+        tags=['Read Or Create (Posts)']
     )
 class PostAPIList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
@@ -20,7 +20,7 @@ class PostAPIList(generics.ListCreateAPIView):
 @extend_schema(
         request=PostSerializer,
         responses={201: PostSerializer},
-        tags=['Posts']
+        tags=['Update or Read (Posts)']
     )
 class PostAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = Post.objects.all()
@@ -30,7 +30,7 @@ class PostAPIUpdate(generics.RetrieveUpdateAPIView):
 @extend_schema(
         request=PostSerializer,
         responses={201: PostSerializer},
-        tags=['Posts']
+        tags=['Update, Read Or Delete (Posts)']
     )
 class PostAPIDelete(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()

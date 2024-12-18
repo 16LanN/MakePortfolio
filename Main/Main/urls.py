@@ -25,7 +25,6 @@ urlpatterns = [
     path('main/', index),
     path('profile/', include('userprofile.urls'), name='profile'),
     path('', include('posts.urls')),
-    path('api/v1/auth/', include('djoser.urls')),
     re_path(r'^auth/', include('djoser.urls.authtoken')),
     path('api/v1/auth/', include('authUser.urls')),
 
