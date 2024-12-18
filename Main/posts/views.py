@@ -10,27 +10,20 @@ from drf_spectacular.types import OpenApiTypes
 @extend_schema(
         request={},
         responses={201: PostSerializer},
-        tags=['Read Or Create (Posts)']
+        tags=['All posts and create']
     )
 class PostAPIList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (IsAuthenticatedOrReadOnly, )
+    
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
 @extend_schema(
         request=PostSerializer,
         responses={201: PostSerializer},
-        tags=['Update or Read (Posts)']
-    )
-class PostAPIUpdate(generics.RetrieveUpdateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-    permission_classes = (IsOwnerOrReadOnly, )
-
-@extend_schema(
-        request=PostSerializer,
-        responses={201: PostSerializer},
-        tags=['Update, Read Or Delete (Posts)']
+        tags=['Detail Post']
     )
 class PostAPIDelete(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
