@@ -5,6 +5,7 @@ from .serializers import UserSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from drf_spectacular.utils import extend_schema
+from .models import CustomUser
 
 
 
@@ -54,3 +55,12 @@ class CurrentUserView(APIView):
         user = request.user
         user.delete()
         return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+    
+
+class AllUsersView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        users = CustomUser.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
