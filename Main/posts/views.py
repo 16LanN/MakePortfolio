@@ -61,6 +61,9 @@ class PostAPIDelete(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
     permission_classes = (IsAdminOrReadOnlyOrOnlyOwner, )
 
+    def perform_create(self, serializer):
+        serializer.save(user_id=self.request.user)
+
 @extend_schema(
         request=PostSerializer,
         responses={201: PostSerializer},
